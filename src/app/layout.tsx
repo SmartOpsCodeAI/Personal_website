@@ -1,48 +1,40 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import Link from "next/link";
 import "./globals.css";
 
-// Initialize the Geist font with Latin subset
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-// Initialize the Geist Mono font with Latin subset
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-// Define metadata for better SEO
 export const metadata: Metadata = {
-  title: "Next.js Beginner Template",
-  description: "A beginner-friendly Next.js template with TailwindCSS and TypeScript",
-  keywords: ["Next.js", "React", "TailwindCSS", "TypeScript", "Template"],
-  authors: [{ name: "Created with Cursor Agent" }],
-  creator: "Cursor Agent",
-  publisher: "Cursor Agent",
+  metadataBase: new URL("https://qasimb.dev"),
+  title: {
+    default: "Qasim B. | AI Automation and Internal Tools",
+    template: "%s | Qasim B.",
+  },
+  description:
+    "Small AI-powered automations and internal tools that reduce admin and speed up operations for SMEs.",
+  keywords: [
+    "AI automation",
+    "internal tools",
+    "business systems",
+    "operations automation",
+    "SME process improvement",
+  ],
+  authors: [{ name: "Qasim B." }],
+  creator: "Qasim B.",
+  publisher: "Qasim B.",
   openGraph: {
-    title: "Next.js Beginner Template",
-    description: "A beginner-friendly Next.js template with TailwindCSS and TypeScript",
-    url: "https://nextjs.org/",
-    siteName: "Next.js Beginner Template",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Next.js Beginner Template",
-      },
-    ],
+    title: "Qasim B. | AI Automation and Internal Tools",
+    description:
+      "Practical AI automations, internal tools, and lightweight systems for business operations.",
+    url: "https://qasimb.dev",
+    siteName: "Qasim B.",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Next.js Beginner Template",
-    description: "A beginner-friendly Next.js template with TailwindCSS and TypeScript",
-    images: ["/og-image.png"],
+    title: "Qasim B. | AI Automation and Internal Tools",
+    description:
+      "Practical AI automations and internal tools that reduce admin and speed up operations.",
   },
   robots: {
     index: true,
@@ -55,12 +47,60 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
-      >
-        {children}
+      <body className="antialiased">
+        {gaId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+              `}
+            </Script>
+          </>
+        ) : null}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
+          <header className="border-b border-[var(--border)] bg-white/95 backdrop-blur">
+            <div className="site-container flex items-center justify-between py-5">
+              <Link href="/" className="text-lg font-semibold tracking-tight">
+                Qasim B.
+              </Link>
+              <nav aria-label="Main navigation" className="flex gap-5 text-sm">
+                <Link href="/services" className="site-link">
+                  Services
+                </Link>
+                <Link href="/proof" className="site-link">
+                  Proof
+                </Link>
+                <Link href="/background" className="site-link">
+                  Background
+                </Link>
+                <Link href="/contact" className="site-link">
+                  Contact
+                </Link>
+              </nav>
+            </div>
+          </header>
+          <main id="main-content">{children}</main>
+          <footer className="border-t border-[var(--border)] bg-white">
+            <div className="site-container flex flex-col gap-3 py-10 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
+              <p>Qasim B. - AI automation and internal tools</p>
+              <p>UK and Saudi Arabia experience</p>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
