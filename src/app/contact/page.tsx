@@ -21,9 +21,12 @@ export default function ContactPage() {
 
         <ContactForm />
 
-        <p className="mt-6 text-sm">
+        <p className="mt-6 text-sm text-gray-600">
           Prefer email? Contact me directly at{" "}
-          <a className="secondary-link" href="mailto:qasimb2014@gmail.com">
+          <a
+            className="text-blue-600 underline"
+            href="mailto:qasimb2014@gmail.com"
+          >
             qasimb2014@gmail.com
           </a>
           .
