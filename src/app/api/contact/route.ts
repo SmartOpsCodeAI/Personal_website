@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "Contact form is not configured yet. Please email hello@qasimb.dev.",
+            "Contact form is not configured yet. Please email qasimb2014@gmail.com .",
         },
         { status: 500 },
       );
