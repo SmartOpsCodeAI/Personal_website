@@ -42,6 +42,12 @@ export async function POST(request: Request) {
     const fromEmail = process.env.CONTACT_FROM_EMAIL;
     const toEmail = process.env.CONTACT_TO_EMAIL;
 
+      console.log("ENV CHECK:", {
+      apiKeyExists: !!apiKey,
+      fromEmail,
+      toEmail,
+    });
+
     if (!apiKey || !fromEmail || !toEmail) {
       return NextResponse.json(
         {
@@ -75,10 +81,13 @@ export async function POST(request: Request) {
       }),
     });
 
-    if (!resendResponse.ok) {
-      return NextResponse.json(
-        { error: "Email delivery failed. Please try again." },
-        { status: 502 },
+      if (!resendResponse.ok) {
+          const errorText = await resendResponse.text();
+          console.log("RESEND ERROR:", resendResponse.status, errorText);
+
+          return NextResponse.json(
+            { error: "Email delivery failed.", details: errorText },
+            { status: 502 },
       );
     }
 
