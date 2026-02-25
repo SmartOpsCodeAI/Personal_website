@@ -23,8 +23,8 @@ export default function ContactPage() {
 
         <p className="mt-6 text-sm">
           Prefer email? Contact me directly at{" "}
-          <a className="secondary-link" href="mailto:hello@qasimb.dev">
-            hello@qasimb.dev
+          <a className="secondary-link" href="mailto:qasimb2014@gmail.com">
+            qasimb2014@gmail.com
           </a>
           .
         </p>
