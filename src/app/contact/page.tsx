@@ -29,6 +29,10 @@ export default function ContactPage() {
           >
             qasimb2014@gmail.com
           </a>
+          . For privacy rights requests, use{" "}
+          <a className="text-blue-600 underline" href="/privacy-request">
+            privacy requests
+          </a>
           .
         </p>
       </div>

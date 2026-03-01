@@ -16,6 +16,8 @@ Personal professional website built with Next.js (App Router) for business clien
 - `/proof`
 - `/background`
 - `/contact`
+- `/privacy`
+- `/privacy-request`
 
 ## Local development
 
@@ -46,4 +48,5 @@ Notes:
 
 - Contact form POSTs to `src/app/api/contact/route.ts`.
 - If contact env vars are missing, form submission returns a configuration error and users can use direct email fallback.
-- Analytics is optional and loads only when `NEXT_PUBLIC_GA_ID` is provided.
+- Analytics is optional and loads only after explicit cookie consent when `NEXT_PUBLIC_GA_ID` is provided.
+- Privacy/cookie controls are available on `/privacy` and via the floating "Cookie settings" button.

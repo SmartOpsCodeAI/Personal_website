@@ -27,6 +27,7 @@ export default function ContactForm() {
           email: formData.get("email"),
           message: formData.get("message"),
           company: formData.get("company"),
+          privacyAccepted: formData.get("privacyAccepted") === "on",
         }),
       });
 
@@ -83,6 +84,21 @@ export default function ContactForm() {
           rows={6}
           className="rounded-md border border-[var(--border)] bg-white px-3 py-2"
         />
+      </label>
+      <label className="flex items-start gap-2 text-sm text-[var(--muted)]">
+        <input
+          type="checkbox"
+          name="privacyAccepted"
+          required
+          className="mt-1"
+        />
+        <span>
+          I have read the{" "}
+          <a href="/privacy" className="secondary-link underline">
+            privacy notice
+          </a>{" "}
+          and agree to processing my enquiry details.
+        </span>
       </label>
       <button type="submit" className="primary-button w-fit" disabled={state === "loading"}>
         {state === "loading" ? "Sending..." : "Send message"}

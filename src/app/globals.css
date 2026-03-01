@@ -95,6 +95,24 @@ p {
   text-decoration: underline;
 }
 
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.65rem;
+  background: #ffffff;
+  color: var(--text);
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background: var(--surface-soft);
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -114,4 +132,55 @@ p {
 *:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+
+.cookie-settings-button {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 30;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  background: #ffffff;
+  color: var(--text);
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.cookie-banner {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 4rem;
+  z-index: 40;
+  max-width: 36rem;
+  margin-inline: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: #ffffff;
+  padding: 1rem;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+.cookie-banner-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-heading);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.cookie-toggle {
+  margin-top: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+}
+
+.cookie-banner-actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import Link from "next/link";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import CookieConsentManager from "@/components/CookieConsentManager";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,26 +48,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const privacyEmail = process.env.CONTACT_TO_EMAIL ?? "qasimb2014@gmail.com";
 
   return (
     <html lang="en">
       <body className="antialiased">
-        {gaId ? (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gaId}');
-              `}
-            </Script>
-          </>
-        ) : null}
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
@@ -98,13 +81,22 @@ export default function RootLayout({
           <main id="main-content">{children}</main>
           <footer className="border-t border-[var(--border)] bg-white">
             <div className="site-container flex flex-col gap-3 py-10 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
-              <p>Qasim B. - AI automation and internal tools</p>
-              <p>UK and Saudi Arabia experience</p>
+              <p>Qasim B. - AI automation and internal tools.</p>
+              <nav aria-label="Footer links" className="flex flex-wrap gap-4">
+                <Link href="/privacy" className="site-link">
+                  Privacy
+                </Link>
+                <Link href="/privacy-request" className="site-link">
+                  Privacy requests
+                </Link>
+                <a href={`mailto:${privacyEmail}`} className="site-link">
+                  {privacyEmail}
+                </a>
+              </nav>
             </div>
           </footer>
         </div>
-        <Analytics />
-        <SpeedInsights />
+        <CookieConsentManager gaId={gaId} />
       </body>
     </html>
   );
