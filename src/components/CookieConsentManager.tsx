@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { initializeFirebaseAnalytics } from "@/lib/firebase/client";
 
 const STORAGE_KEY = "cookie-consent-v1";
 
@@ -101,6 +102,14 @@ export default function CookieConsentManager({ gaId }: Props) {
 
   const analyticsEnabled = consent?.analytics === true;
   const panelOpen = isHydrated && (settingsOpen || consent === null);
+
+  useEffect(() => {
+    if (!analyticsEnabled) {
+      return;
+    }
+
+    void initializeFirebaseAnalytics();
+  }, [analyticsEnabled]);
 
   return (
     <>
